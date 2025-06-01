@@ -4,43 +4,43 @@ Un mini terminal personnalisable en C, avec des fonctionnalités pratiques et un
 
 # Description Courte
 
-Le programme est un shell (interpréteur de commandes) minimaliste écrit en langage C. Il permet d'exécuter des commandes système, de manipuler des fichiers et dossiers, et d’éditer du texte,tout cela dans une interface simplifiée faite maison.
+Le programme est un shell (interpréteur de commandes) minimaliste écrit en **langage C**. Il permet d'exécuter des commandes système, de manipuler des fichiers et dossiers, et d’éditer du texte,tout cela dans une interface simplifiée faite maison.
 
 # Fonctionnalités Principales
 
-- ### cd <dossier> – Change de répertoire
+- **cd** : Change de répertoire
 
-- ### ls – Liste les fichiers du dossier courant
+- **ls** : Liste les fichiers du dossier courant
 
-- ### mkdir <nom> – Crée un nouveau dossier
+- **mkdir** : Crée un nouveau dossier
 
-- ### nano <fichier> – Ouvre un fichier dans l’éditeur nano
+- **nano** : Ouvre un fichier dans l’éditeur nano
 
-- ### help – Affiche les commandes disponibles
+- **help** : Affiche les commandes disponibles
 
-- ### exit – Ferme le shell
+- **exit** : Ferme le shell
 
 # Technologies Utilisées
 
 ## Langage : C
 
 ## Librairies : 
-- ### stdio.h, stdlib.h, string.h : gestion des entrées/sorties, allocations mémoire, manipulation de texte.
+- ***stdio.h, stdlib.h, string.h*** : gestion des entrées/sorties, allocations mémoire, manipulation de texte.
 
-- ### unistd.h : exécution de commandes, gestion des processus.
+- ***unistd.h*** : exécution de commandes, gestion des processus.
 
-- ### dirent.h : lecture des dossiers (pour ls).
+- ***dirent.h*** : lecture des dossiers (pour ls).
 
-- ### sys/types.h, sys/wait.h,sys/stat.h : manipulation des processus, des statuts et des dossiers.
+- ***sys/types.h, sys/wait.h,sys/stat.h*** : manipulation des processus, des statuts et des dossiers.
 
 
-# Compilez le code :
+# Compilez le code
 
-gcc -o Rus04 Rush04.c
+```cgcc -o Rus04 Rush04.c
      ou bien
-clang Rush04 -o Rush04
+clang Rush04 -o Rush04```
 
-## Lancez le shell :
+## Lancez le shell
 
 ./minishell
 
