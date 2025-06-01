@@ -247,6 +247,6 @@ shell> exit
 Développé avec passion par : 
 - ***Almoustapha_Moulaye_O***
 - ***Ridiwane_AG***
-- ***Koffi_Lévis_A**
+- ***Koffi_Lévis_A***
 - ***Ridouane_I***
 - ***Boureima_Issa_Adamou_R***
