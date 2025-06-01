@@ -47,29 +47,6 @@ clang Rush04 -o Rush04
 ./minishell
 ```
 
-
-🧪 Utilisation
-
-shell> mkdir test
-shell> cd test
-shell> nano notes.txt
-shell> ls
-notes.txt
-shell> help
-shell> exit
-
-
----
-
-# 👥 Équipe
-
-Développé avec passion par : 
-- ***Al***
-- ***Boureima_Issa_Adamou_R***
-- ***Rid***
-- ***Ri***
-
-
 # Code Source Commenté et Expliqué
 
 ## Fichier : shell.c
@@ -265,3 +242,10 @@ shell> help
 (exit, cd, ls, mkdir, nano, help)
 shell> exit
 ```
+# 👥 Équipe
+
+Développé avec passion par : 
+- ***Al***
+- ***Boureima_Issa_Adamou_R***
+- ***Rid***
+- ***Ri***
