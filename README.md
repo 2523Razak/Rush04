@@ -245,7 +245,8 @@ shell> exit
 # 👥 Équipe
 
 Développé avec passion par : 
-- ***Al***
+- ***Almoustapha_Moulaye_O***
+- ***Ridiwane_AG***
+- ***Koffi_Lévis_A**
+- ***Ridouane_I***
 - ***Boureima_Issa_Adamou_R***
-- ***Rid***
-- ***Ri***
