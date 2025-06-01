@@ -36,15 +36,16 @@ Le programme est un shell (interpréteur de commandes) minimaliste écrit en **l
 
 # Compilez le code
 
-```cgcc -o Rus04 Rush04.c
+```c
+gcc -o Rus04 Rush04.c
      ou bien
-clang Rush04 -o Rush04```
+clang Rush04 -o Rush04
+```
 
 ## Lancez le shell
-
+```c
 ./minishell
-
-
+```
 
 
 🧪 Utilisation
@@ -60,18 +61,19 @@ shell> exit
 
 ---
 
-👥 Équipe
+# 👥 Équipe
 
-Développé avec passion par Boureima Issa Adamou Razak 👨‍💻
-Étudiant en Master EEA et innovateur dans les solutions numériques pour l’Afrique.
+Développé avec passion par : 
+- ***Al***
+- ***Boureima_Issa_Adamou_R***
+- ***Rid***
+- ***Ri***
 
 
----
+# Code Source Commenté et Expliqué
 
-🔎 Code Source Commenté et Expliqué
-
-📁 Fichier : shell.c
-
+## Fichier : shell.c
+```c
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -80,29 +82,18 @@ Développé avec passion par Boureima Issa Adamou Razak 👨‍💻
 #include <sys/wait.h>
 #include <dirent.h>
 #include <sys/stat.h>
+```
+Ces en-têtes permettent d'utiliser les fonctions nécessaires pour la **gestion des fichiers, processus et entrées/sorties**. C'est la base de tout programme UNIX-like.
 
-> Ces en-têtes permettent d'utiliser les fonctions nécessaires pour la gestion des fichiers, processus et entrées/sorties. C'est la base de tout programme UNIX-like.
-
-
-
-
----
-
-🧱 Macros de configuration
-
+```c
 #define MAX_INPUT_SIZE 1024
 #define MAX_TOKENS 64
 #define DELIMITERS " \t\r\n\a"
+```
+Ces constantes définissent la **taille maximale de l'entrée utilisateur, le nombre maximal de mots par commande, et les caractères utilisés pour séparer ces mots** (espace, tabulation, retour à la ligne).
 
-> Ces constantes définissent la taille maximale de l'entrée utilisateur, le nombre maximal de mots par commande, et les caractères utilisés pour séparer ces mots (espace, tabulation, retour à la ligne).
-
-
-
-
----
-
-❓ Fonction d’aide
-
+## Fonction d’aide
+```c
 void display_help() {
     printf("\n=== AIDE ===\n");
     printf("exit      - Quitter le shell\n");
@@ -112,32 +103,25 @@ void display_help() {
     printf("nano <f>  - Éditer un fichier\n");
     printf("help      - Afficher cette aide\n\n");
 }
+```
 
-> Une simple fonction qui imprime un menu d'aide dans la console. Elle est appelée lorsque l'utilisateur tape help.
+Une simple fonction qui imprime un menu d'aide dans la console. Elle est appelée lorsque l'utilisateur tape help.
 
 
-
-
----
-
-🧠 Fonction principale d'exécution
-
+## Fonction principale d'exécution
+```c
 void execute_command(char** args) {
     if (args[0] == NULL) return;
-
-> Si l'utilisateur n'a rien tapé, on ne fait rien.
-
-
-
+```
+Si l'utilisateur n'a rien tapé, on ne fait rien.
+```c
 if (strcmp(args[0], "exit") == 0) {
         printf("Merci d'avoir utilisé Super Mini Shell!\n");
         exit(0);
     }
-
-> Quitte le programme si la commande est exit.
-
-
-
+```
+Quitte le programme si la commande est exit.
+```c
 else if (strcmp(args[0], "cd") == 0) {
         if (args[1] == NULL) {
             fprintf(stderr, "Usage: cd <directory>\n");
@@ -145,11 +129,10 @@ else if (strcmp(args[0], "cd") == 0) {
             perror("Erreur lors du changement de dossier");
         }
     }
+```
+Gère la commande **cd** avec **chdir**, qui change le répertoire courant.
 
-> Gère la commande cd avec chdir, qui change le répertoire courant.
-
-
-
+```c
 else if (strcmp(args[0], "ls") == 0) {
         DIR* dir = opendir(".");
         struct dirent* entry;
@@ -162,10 +145,10 @@ else if (strcmp(args[0], "ls") == 0) {
         }
         closedir(dir);
     }
+```
+Liste les fichiers et dossiers du répertoire courant à l'aide de opendir, readdir, puis closedir.
 
-> Liste les fichiers et dossiers du répertoire courant à l'aide de opendir, readdir, puis closedir.
-
-
+```c
 
 else if (strcmp(args[0], "mkdir") == 0) {
         if (args[1] == NULL) {
@@ -176,11 +159,10 @@ else if (strcmp(args[0], "mkdir") == 0) {
             printf("Dossier créé: %s\n", args[1]);
         }
     }
+```
+Crée un dossier avec **mkdir**. Le mode 0755 permet au propriétaire d'avoir tous les droits, les autres uniquement lecture/exécution.
 
-> Crée un dossier avec mkdir. Le mode 0755 permet au propriétaire d'avoir tous les droits, les autres uniquement lecture/exécution.
-
-
-
+```c
 else if (strcmp(args[0], "nano") == 0) {
         if (args[1] == NULL) {
             fprintf(stderr, "Usage: nano <filename>\n");
@@ -192,19 +174,17 @@ else if (strcmp(args[0], "nano") == 0) {
             system(command);
         }
     }
+```
+Ouvre un fichier avec nano (ou un autre éditeur défini dans la variable d'environnement EDITOR) grâce à system().
 
-> Ouvre un fichier avec nano (ou un autre éditeur défini dans la variable d'environnement EDITOR) grâce à system().
-
-
-
+```c
 else if (strcmp(args[0], "help") == 0) {
         display_help();
     }
+```
+Affiche l'aide si l'utilisateur tape help.
 
-> Affiche l'aide si l'utilisateur tape help.
-
-
-
+```c
 else {
         pid_t pid = fork();
         if (pid == 0) {
@@ -219,16 +199,12 @@ else {
         }
     }
 }
-
-> Toutes les autres commandes sont exécutées comme un vrai shell, avec fork() pour créer un processus fils et execvp() pour remplacer le processus courant par la commande saisie.
-
-
+```
+Toutes les autres commandes sont exécutées comme un vrai shell, avec **fork()** pour créer un processus fils et **execvp()** pour remplacer le processus courant par la commande saisie.
 
 
----
-
-🧑‍💻 Analyseur de ligne de commande
-
+# Analyseur de ligne de commande
+```c
 char** parse_input(char* input) {
     int bufsize = MAX_TOKENS;
     char** tokens = malloc(bufsize * sizeof(char*));
@@ -243,12 +219,13 @@ char** parse_input(char* input) {
     tokens[position] = NULL;
     return tokens;
 }
-
-> Cette fonction divise une chaîne tapée par l'utilisateur en "mots" (tokens), qu'on peut ensuite analyser pour savoir quelle commande est appelée.
+```
+Cette fonction **divise une chaîne tapée par l'utilisateur en "mots" (tokens)**, qu'on peut ensuite analyser pour savoir quelle commande est appelée.
 
 # Point d’entrée principal
 
-```int main() {
+```c
+int main() {
     char input[MAX_INPUT_SIZE];
     char** args;
 
@@ -268,12 +245,12 @@ char** parse_input(char* input) {
     }
 
     return 0;
-}```
-
-Boucle principale du shell : affiche une invite shell>, attend l'entrée, l'analyse, exécute, puis recommence jusqu'à ce que l'utilisateur tape exit ou quitte le shell.
+}
+```
+Boucle principale du shell : **affiche une invite shell>**, attend l'entrée, l'analyse, exécute, puis recommence jusqu'à ce que l'utilisateur tape exit ou quitte le shell.
 
 # Exemple d'exécution
-
+```c
 $ ./minishell
 === Super Mini Shell ===
 Commandes spéciales: nano, mkdir, ls, cd, help, exit
@@ -287,3 +264,4 @@ notes.txt
 shell> help
 (exit, cd, ls, mkdir, nano, help)
 shell> exit
+```
